@@ -18,19 +18,44 @@ h1
 {
     position: absolute;
     color: #6e3a3a;
-    top: 40px; left: 50%;
+    top: 30px; left: 27%;
 }
 .circle
 {
+    position: absolute;
+    top: 20px;
+    left: 0;
     width: 640px;
     height: 640px;
-    position: relative;
-    background: coral;
     border-radius: 50%;
-    border: 3px solid black;
-    top: 20px;
-    margin-left: 150px;
+    background-color: #111;
+    overflow: hidden;
+    box-shadow: 0 0 0 5px #333,
+    0 0 0 15px #fff,
+    0 0 0 18px #111;
+    transition: transform 5s ease-in-out;
 }
+.circle .textoncircle
+{
+    position: absolute;
+    width: calc(640px / var(--words));
+    height: calc(640px / var(--words));
+    background: #fff;
+    transform-origin: bottom right;
+    transform: rotate(calc((360deg / var(--words)) * var(--i)));    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+}
+
+.circle .textoncircle span
+{
+    position: relative;
+    transform: rotate(225deg);
+}
+
 
 .inputfield
 {
@@ -48,18 +73,16 @@ h1
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgb(237, 238, 240);
-    border-radius: 30px;
-    padding-left: 20px;
-    margin-bottom: 25px;
 }
-input
+textarea
 {
     flex: 1;
     border: none;
     outline: none;
-    background: transparent;
-    padding: 10px;  
+    background: rgb(237, 238, 240);
+    padding: 10px;
+    resize: none;
+    border-radius: 10px;
 }
 button
 {
@@ -71,13 +94,9 @@ button
     font-size: 16px;
     cursor: pointer;
     border-radius: 40px;
+    margin-bottom: 0;
 }
 ul li
 {
-    list-style: none;
-    font-size: 17px;
-    padding: 0px 8px 2px 50px;
-    user-select: none;
-    cursor: pointer;
-    color: #fff;
+    color: white;
 }

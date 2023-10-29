@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Õnnering</title>
-        <h1>Ring</h1>
+        <title>Õnneratas</title>
+        <h1>Õnneratas</h1>
         <link rel="stylesheet" href="style.css">
         <meta charset="utf-8">
     </head>
     <body>
-        <div class="circle" id="ring1">
-            <div class="text" id="ring"><span></span></div>
-        </div>
+        <div class="circle" id="ring"></div>
         <div class="inputfield">
             <div class="userinput">
-                <input type="text" id="input-box" placeholder="Lisa sõna">
+                <textarea name="ui" id="input-box" cols="30" rows="10" placeholder="Lisa loetelu"></textarea>
                 <button onclick="addWord()">Lisa</button>
+                <button onclick="spin()">Keeruta</button>
             </div>
             <ul id="list"></ul>
         </div>
