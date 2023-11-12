@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Õnneratas</title>
-        <h1>Õnneratas</h1>
-        <link rel="stylesheet" href="style.css">
         <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <title>Õnneratas</title>
     </head>
     <body>
-        <div class="circle" id="ring"></div>
-        <div class="inputfield">
-            <div class="userinput">
-                <textarea name="ui" id="input-box" cols="30" rows="10" placeholder="Lisa loetelu"></textarea>
-                <button onclick="addWord()">Lisa</button>
-                <button onclick="spin()">Keeruta</button>
+        <main>
+            <h1>Õnneratas</h1>
+            <div class="container">
+                <img src="data/arrow_img2.png" alt="arrow">
+                <svg id="circle" viewBox="0 0 200 200">
+                    <circle fill="white" stroke="black" r="99" cx="100" cy="100"/>
+                </svg>
+                <div class="form">
+                    <textarea name="ui" id="input-box" cols="30" rows="10" placeholder="Lisa loetelu"></textarea>
+                    <button onclick="addWord()">Uuenda</button>
+                    <button onclick="spin()">Keeruta</button>
+                </div>
             </div>
-            <ul id="list"></ul>
-        </div>
+        </main>
+        <script src="app.js"></script>
     </body>
-    <script src="app.js"></script>
 </html>

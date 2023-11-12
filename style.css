@@ -4,99 +4,78 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', 'sans-serif';
+    font-size: 20px;
 }
-
 body
 {
     background: #baccd2;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+}
+main {
+    margin: 0 auto;
+    max-width: 1024px;
 }
 h1
 {
-    position: absolute;
     color: #6e3a3a;
-    top: 30px; left: 27%;
+    padding: 20px 0 40px;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
 }
-.circle
+.container
 {
-    position: absolute;
-    top: 20px;
-    left: 0;
-    width: 640px;
-    height: 640px;
-    border-radius: 50%;
-    background-color: #111;
-    overflow: hidden;
-    box-shadow: 0 0 0 5px #333,
-    0 0 0 15px #fff,
-    0 0 0 18px #111;
+    display: flex;
+}
+svg
+{
+    height: 75vh;
+    align-self: flex-start;
+    transform-origin: center;
     transition: transform 5s ease-in-out;
+    margin-right: 3em;
 }
-.circle .textoncircle
+.form
 {
-    position: absolute;
-    width: calc(640px / var(--words));
-    height: calc(640px / var(--words));
-    background: #fff;
-    transform-origin: bottom right;
-    transform: rotate(calc((360deg / var(--words)) * var(--i)));    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-    cursor: pointer;
-}
-
-.circle .textoncircle span
-{
-    position: relative;
-    transform: rotate(225deg);
-}
-
-
-.inputfield
-{
-    width: 100%;
-    max-width: 540px;
+    margin: 10px;
+    padding: 20px;
     background: #6e3a3a;
-    margin: 100px auto 20px;
-    padding: 40px 30px 70px;
     border-radius: 10px;
-    margin-right: 10px;
-    margin-bottom: 500px;
-}
-.userinput
-{
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
 }
 textarea
 {
-    flex: 1;
+    background: rgb(237, 238, 240);
+    border-radius: 10px;
+    padding: 10px;
     border: none;
     outline: none;
-    background: rgb(237, 238, 240);
-    padding: 10px;
     resize: none;
-    border-radius: 10px;
+    flex-grow: 1;
 }
 button
 {
-    border: none;
-    outline: none;
+    display: block;
+    margin: 10px auto;
     padding: 16px 50px;
+    border-radius: 40px;
+    border: 1px solid #8a7d7d;
+    outline: none;
     background: #8b7979;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 40px;
-    margin-bottom: 0;
 }
-ul li
+button:hover
 {
-    color: white;
+    background: #685a5a;
+    border: 1px solid #fff;
+}
+img
+{   
+    position: absolute;
+    transform: rotate(90deg);
+    scale: 0.2 0.2;
+    top: -170px;
+    left: 17%;
 }
