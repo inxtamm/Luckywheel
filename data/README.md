@@ -8,3 +8,5 @@
 
 * https://developer.mozilla.org/en-US/ Dokumentatsioon
 * ChatGPT
+
+* x-button: https://thenounproject.com/icon/close-59746/
