@@ -7,6 +7,7 @@ let wordsectors = document.getElementsByClassName('word')
 let filteredWords = [];
 let spinvalue = Math.ceil(Math.random() * 360);
 
+const initial_circle = wheel.children[0]
 let centerPos = []
 centerPos[0] = parseInt(initial_circle.getAttribute('cx'))
 centerPos[1] = parseInt(initial_circle.getAttribute('cy'))
