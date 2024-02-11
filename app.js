@@ -14,13 +14,17 @@ centerPos[1] = parseInt(initial_circle.getAttribute('cy'))
 const radius = parseInt(initial_circle.getAttribute('r'))
 
 
-inputfield.addEventListener('keyup', (e) => {
+inputfield.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         addWord();
-    } if (e.key in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']) {
-        characters = inputfield.value.split("");
-        characters[inputfield.value.length - 1] = replace_text(e.key);
-        inputfield.value = characters.toString().replaceAll(',', '');
+    } else if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '+'].indexOf(e.key) >= 0) {
+        e.preventDefault();
+        let text = inputfield.value;
+        let index = inputfield.selectionStart;
+        text = text.split('');
+        text.splice(index, 0, replace_text(e.key));
+        text = text.join('');
+        inputfield.value = text;
     }
 });
 
@@ -61,7 +65,8 @@ function removeWord(text)
     filteredWords.splice(filteredWords.indexOf(text), 1);
     for (let i = 0; i < wordsectors.length; i++) {
         if (text ==  wordsectors[i].children[0].innerHTML) {
-            listclass.removeChild(wordsectors[i])
+            listclass.removeChild(wordsectors[i]);
+            break;
         }
     }
     genSectors(filteredWords);
@@ -75,16 +80,16 @@ function spin() {
 function replace_text(text)
 {
     if (dropdown.value == 'sub') {
-        return text.replace('1', '₁')
-        .replace('2', '₂')
-        .replace('3', '₃')
-        .replace('4', '₄')
-        .replace('5', '₅')
-        .replace('6', '₆')
-        .replace('7', '₇')
-        .replace('8', '₈')
-        .replace('9', '₉')
-        .replace('0', '₀');
+        return text.replace(/1/g, '₁')
+        .replace(/2/g, '₂')
+        .replace(/3/g, '₃')
+        .replace(/4/g, '₄')
+        .replace(/5/g, '₅')
+        .replace(/6/g, '₆')
+        .replace(/7/g, '₇')
+        .replace(/8/g, '₈')
+        .replace(/9/g, '₉')
+        .replace(/0/g, '₀');
     }
     else if (dropdown.value == 'sup') {
         return text.replace('1', '¹')
