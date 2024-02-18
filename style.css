@@ -54,19 +54,34 @@ h1
     margin-top: 20px;
     flex-grow: 1;
 }
+label
+{
+    display: flex;
+    flex-direction: row;
+    border-radius: 3px;
+    background-color: #fff;
+}
 .form
 {
-    margin: 10px;
-    margin-top: 60px;
-    padding: 20px;
     width: fit-content;
     height: max-content;
-    max-width: 500px;
-    min-width: 400px;
-    background: #6e3a3a;
-    border-radius: 10px;
+    max-width: 300px;
+    min-width: 200px;
     display: flex;
+    flex-grow: 3px;
     flex-direction: column;
+}
+#spinbutton {
+    border-radius: 50%;
+    margin: 0;
+    position: relative;
+    right: 25vh;
+    top: 35vh;
+    max-width: 50px;
+    max-height: 50px;
+}
+.form label {
+    background: none;
 }
 .form .word
 {
@@ -80,7 +95,7 @@ h1
     justify-content: center;
 }
 
-.form .word text
+.form .word span
 {
     position: absolute;
     font-size: 35px;
@@ -104,19 +119,17 @@ h1
     width: 50px;
     height: 50px;
 }
-
 .form .word button:hover img
 {
     background: #ddddddba;
     border-radius: 50%;
 }
-input #input-box
+.form input
 {
     background: rgb(237, 238, 240);
     border-radius: 10px;
     padding: 10px;
-    border: none;
-    outline: none;
+    border-color: #fff;
 }
 .form .normalbutton button
 {
