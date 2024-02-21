@@ -1,8 +1,10 @@
 const inputfield = document.getElementById('inputbox');
-const listclass = document.getElementById('form');
+const listclass = document.getElementById('wordcontainer');
 const wheel = document.getElementById('wheel');
 const superindex = document.getElementById('superindex');
 const subindex = document.getElementById('subindex');
+const spinbutton = document.getElementById('spinbutton');
+
 let wordsectors = document.getElementsByClassName('word')
 
 let filteredWords = [];
@@ -32,11 +34,11 @@ inputfield.addEventListener('keypress', (e) => {
         inputfield.value = text.substring(0, index) + replace_text(e.key) + text.substring(index);;
     }
 });
-superindex.addEventListener("click", () => {
-    subindex.checked = false;
-});
-subindex.addEventListener("click", () => {
-    superindex.checked = false;
+
+spinbutton.style.opacity = 0;
+
+spinbutton.addEventListener("click", () => {
+    spin();
 });
 
 function showWinText() {
@@ -48,6 +50,7 @@ function addWord() {
     if (!word) return;
     filteredWords.push(word);
     inputfield.value = '';
+    if (filteredWords.length >= 2) spinbutton.style.opacity = 1;
 
     let wordsector = document.createElement('div');
     let textonsector = document.createElement('span');
@@ -85,9 +88,11 @@ function removeWord(event)
 }
 
 function spin() {
-    setTimeout(showWinText, 5000);
-    spinvalue += Math.ceil(Math.random() * 3600);
-    wheel.setAttribute("transform", "rotate(" + spinvalue + ")");
+    if (filteredWords.length > 1) {
+        setTimeout(showWinText, 5000);
+        spinvalue += Math.ceil(Math.random() * 3600);
+        wheel.setAttribute("transform", "rotate(" + spinvalue + ")");
+    }
 }
 
 function replace_text(text)
@@ -131,7 +136,7 @@ function winningWord(){
         let endAngle = wordAngles[word][1] + rotAngle;
         startAngle %= 360;
         endAngle %= 360;
-        if (startAngle > endAngle){
+        if (startAngle > endAngle || startAngle == 0){
             return word;
         }
     } 
@@ -182,8 +187,10 @@ function genSectors(filteredWords)
 function createLabel(label, angleStart, angleEnd, count)
 {
     const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    text.style = 'user-select: none; text-anchor: middle';
-    text.style.fontSize = `${15 - Math.round(count / 30)}px`;
+    text.style = 'user-select: none; text-anchor: start';
+
+    if (count == 1) text.style.textAnchor = 'middle';
+    text.style.fontSize = `${15 - Math.round(count / 30) - Math.round(label.length / 1.8)}px`;
     text.setAttribute('x', `${centerPos[0]}`);
     text.setAttribute('y', `${centerPos[1] + 3}`);
     text.innerHTML = label;
@@ -191,7 +198,10 @@ function createLabel(label, angleStart, angleEnd, count)
     const angleMiddle = (angleEnd + angleStart) / 2 - Math.PI / 2;
     const rotation_value = radians_to_degrees(angleMiddle);
     let transform = "rotate(" + rotation_value + ")"
-    if (count > 1) transform += " translate(30 0)"
+    let translate_x_value = (30 + count - label.length)
+    if (count <= 5) translate_x_value = 30;
+    if (count > 24) translate_x_value -= count - 24
+    if (count > 1) transform += " translate(" + translate_x_value + " 0)"
     text.setAttribute("transform", transform);
     return text;
 }

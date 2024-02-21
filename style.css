@@ -1,3 +1,4 @@
+@import url('http://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
 *
 {
     margin: 0;
@@ -9,7 +10,7 @@
 }
 body
 {
-    background: #baccd2;
+    background: rgb(240, 240, 240);
 }
 svg .wheel
 {
@@ -54,56 +55,50 @@ h1
     margin-top: 20px;
     flex-grow: 1;
 }
-label
-{
-    display: flex;
-    flex-direction: row;
-    border-radius: 3px;
-    background-color: #fff;
-}
 .form
 {
+    display: flex;
+    flex-direction: column;
     width: fit-content;
     height: max-content;
     max-width: 300px;
     min-width: 200px;
-    display: flex;
-    flex-grow: 3px;
-    flex-direction: column;
 }
-#spinbutton {
-    border-radius: 50%;
-    margin: 0;
-    position: relative;
-    right: 25vh;
-    top: 35vh;
-    max-width: 50px;
-    max-height: 50px;
+#wordcontainer {
+    background-color: aliceblue;
+    width: max-content;
+    
+    div:last-child {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    div:first-child {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-top: rgb(188, 188, 188) 2px solid;
+    }
 }
-.form label {
-    background: none;
-}
-.form .word
+
+.form .wordcontainer .word
 {
     position: relative;
-    margin: 5px;
-    width: 200px;
+    min-width: 300px;
     height: 60px;
     background: #fff;
-    border: #000 5px solid;
-    border-radius: 50px;
+    border: rgb(188, 188, 188) 2px solid;
+    border-top:none;
     justify-content: center;
+    align-items: center;
 }
 
-.form .word span
+.form .wordcontainer .word span
 {
     position: absolute;
-    font-size: 35px;
+    font-size: 30px;
     margin-left: 10px;
-    margin-bottom: 10px;
 }
 
-.form .word button img
+.form .wordcontainer .word button img
 {
     width: 50px;
     height: 50px;
@@ -116,36 +111,64 @@ label
     align-self: self-end;
     user-select: none;
     padding-left: 140px;
+    margin-top: 4px;
     width: 50px;
     height: 50px;
+    transform: translateX(100px);
 }
 .form .word button:hover img
 {
     background: #ddddddba;
     border-radius: 50%;
 }
-.form input
+
+/*Üla-, alaindeksid, tekst*/
+.form .row1 .radio-input-container {
+    display: inline-flex;
+    flex-direction: row;
+    margin: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 30px;
+    width: min-content;
+}
+label {
+    padding: 10px;
+}
+input[type="radio"] {
+    opacity: 0;
+    border: 2px solid #ff0000;
+}
+input[type="radio"]:checked + label {
+    border-radius: 10px;
+    border: solid 2px rgb(188, 188, 188);
+}
+.form .row1 {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.form #inputbox
 {
+    margin-bottom: 10px;
     background: rgb(237, 238, 240);
     border-radius: 10px;
     padding: 10px;
-    border-color: #fff;
+    border: solid 2px rgb(188, 188, 188);
 }
-.form .normalbutton button
-{
-    display: block;
-    margin: 2px auto;
-    padding: 16px 50px;
-    border-radius: 40px;
-    border: 1px solid #8a7d7d;
-    outline: none;
-    background: #8b7979;
+.form .row1 .normalbutton {
+    height: min-content;
+    width: min-content;
+    padding: 10px;
+    margin-right: 2px;
+    border-radius: 10px;
+    border: none;
+    background: #88C056;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
 }
-.form .normalbutton button:hover
+.form .row1 .normalbutton:hover
 {
     background: #685a5a;
-    border: 1px solid #fff;
 }
