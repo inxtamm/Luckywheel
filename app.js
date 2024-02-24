@@ -10,6 +10,7 @@ let wordsectors = document.getElementsByClassName('word')
 let filteredWords = [];
 let wordAngles = {};
 let spinvalue = Math.ceil(Math.random() * 360);
+let canSpin = true;
 
 const initialCircle = wheel.children[0].cloneNode()
 let centerPos = []
@@ -35,14 +36,24 @@ inputfield.addEventListener('keypress', (e) => {
     }
 });
 
-spinbutton.style.opacity = 0;
+function setSpin(on) {
+    if (on) {
+        spinbutton.style.opacity = 1;
+        canSpin = true;
+    } else {
+        spinbutton.style.opacity = 0;
+        canSpin = false;
+    }
+}
 
+setSpin(false)
 spinbutton.addEventListener("click", () => {
     spin();
 });
 
 function showWinText() {
     document.getElementById("winningWord").innerHTML = winningWord();
+    setSpin(true);
 }
 
 function addWord() {
@@ -50,7 +61,7 @@ function addWord() {
     if (!word) return;
     filteredWords.push(word);
     inputfield.value = '';
-    if (filteredWords.length >= 2) spinbutton.style.opacity = 1;
+    if (filteredWords.length >= 2) setSpin(true);
 
     let wordsector = document.createElement('div');
     let textonsector = document.createElement('span');
@@ -92,7 +103,8 @@ function removeWord(event)
 }
 
 function spin() {
-    if (filteredWords.length > 1) {
+    if (filteredWords.length > 1 && canSpin) {
+        setSpin(false)
         setTimeout(showWinText, 5000);
         spinvalue += Math.ceil(Math.random() * 3600);
         wheel.setAttribute("transform", "rotate(" + spinvalue + ")");
