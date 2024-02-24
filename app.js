@@ -11,7 +11,7 @@ let filteredWords = [];
 let wordAngles = {};
 let spinvalue = Math.ceil(Math.random() * 360);
 
-const initialCircle = wheel.children[0]
+const initialCircle = wheel.children[0].cloneNode()
 let centerPos = []
 centerPos[0] = parseInt(initialCircle.getAttribute('cx'))
 centerPos[1] = parseInt(initialCircle.getAttribute('cy'))
@@ -82,6 +82,10 @@ function removeWord(event)
             wordElement.remove();
             filteredWords.splice(i, 1);
             genSectors(filteredWords);
+            if (filteredWords.length <= 1) {
+                spinbutton.style.opacity = 0;
+                wheel.appendChild(initialCircle);
+            }
             return;
         }
     }
@@ -203,5 +207,7 @@ function createLabel(label, angleStart, angleEnd, count)
     if (count > 24) translate_x_value -= count - 24
     if (count > 1) transform += " translate(" + translate_x_value + " 0)"
     text.setAttribute("transform", transform);
+    if (label.length >= 7 && count != 1)
+        text.setAttribute('textLength', radius - translate_x_value - 3);
     return text;
 }

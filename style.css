@@ -6,7 +6,8 @@
     box-sizing: border-box;
     font-family: 'Poppins', 'sans-serif';
     font-size: 20px;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content:center;
 }
 body
 {
@@ -18,7 +19,7 @@ svg .wheel
     transform-origin: center;
     align-items: center;
     min-width: 400px;
-    transition: transform 5s ease-in-out;
+    transition: all 5s ease-in-out;
 }
 svg text
 {
@@ -94,10 +95,12 @@ h1
 .form .wordcontainer .word span
 {
     position: absolute;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 220px;
     font-size: 30px;
     margin-left: 10px;
 }
-
 .form .wordcontainer .word button img
 {
     width: 50px;
