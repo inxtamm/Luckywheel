@@ -12,11 +12,11 @@ let words = [];
 let spinvalue = Math.ceil(Math.random() * 360);
 let canSpin = true;
 
-const initialCircle = wheel.children[0].cloneNode()
-let centerPos = []
-centerPos[0] = parseInt(initialCircle.getAttribute('cx'))
-centerPos[1] = parseInt(initialCircle.getAttribute('cy'))
-const radius = parseInt(initialCircle.getAttribute('r'))
+const initialCircle = wheel.children[0].cloneNode();
+let centerPos = [];
+centerPos[0] = parseInt(initialCircle.getAttribute('cx'));
+centerPos[1] = parseInt(initialCircle.getAttribute('cy'));
+const radius = parseInt(initialCircle.getAttribute('r'));
 
 
 inputfield.addEventListener('keypress', (e) => {
@@ -32,7 +32,7 @@ inputfield.addEventListener('keypress', (e) => {
         e.preventDefault();
         const text = inputfield.value;
         const index = inputfield.selectionStart;
-        inputfield.value = text.substring(0, index) + replace_text(e.key) + text.substring(index);;
+        inputfield.value = text.substring(0, index) + replace_text(e.key) + text.substring(index);
     }
 });
 
@@ -104,7 +104,7 @@ function removeWord(event)
 
 function spin() {
     if (filteredWords.length > 1 && canSpin) {
-        setSpin(false)
+        setSpin(false);
         setTimeout(showWinText, 5000);
         spinvalue += Math.ceil(Math.random() * 3600);
         wheel.setAttribute("transform", "rotate(" + spinvalue + ")");
@@ -146,15 +146,13 @@ function replace_text(text)
 
 function winningWord(){
     const rotAngle = parseInt(wheel.getAttribute('transform').split('(')[1].split(')')[0]);
-    for (const word_info in words){
-        for (const word in words[word_info]){
-            let startAngle = words[word_info][word][0] + rotAngle;
-            let endAngle = words[word_info][word][1] + rotAngle;
-            startAngle %= 360;
-            endAngle %= 360;
-            if (startAngle > endAngle || startAngle == 0){
-                return word;
-            }
+    for (const word_info of words){
+        let startAngle = word_info['start'] + rotAngle;
+        let endAngle = word_info['end'] + rotAngle;
+        startAngle %= 360;
+        endAngle %= 360;
+        if (startAngle > endAngle || startAngle == 0){
+            return word_info['value'];
         }
     } 
 }
@@ -195,9 +193,7 @@ function genSectors(filteredWords)
             path.setAttribute('stroke', '#ddddddba');
             elements.push(path);
             elements.push(createLabel(filteredWords[i], startAngle, endAngle, filteredWords.length));
-            let dict = {}
-            dict[filteredWords[i]] = [radians_to_degrees(startAngle), radians_to_degrees(endAngle)]
-            words.push(dict);
+            words.push({'value': filteredWords[i], 'start': radians_to_degrees(startAngle), 'end': radians_to_degrees(endAngle)});
         }
     }
     wheel.replaceChildren(...elements);
@@ -216,13 +212,13 @@ function createLabel(label, angleStart, angleEnd, count)
 
     const angleMiddle = (angleEnd + angleStart) / 2 - Math.PI / 2;
     const rotation_value = radians_to_degrees(angleMiddle);
-    let transform = "rotate(" + rotation_value + ")"
-    let translate_x_value = (30 + count - label.length)
+    let transform = "rotate(" + rotation_value + ")";
+    let translate_x_value = (30 + count - label.length);
     if (count <= 5) translate_x_value = 30;
-    if (count > 24) translate_x_value -= count - 24
-    if (count > 1) transform += " translate(" + translate_x_value + " 0)"
+    if (count > 24) translate_x_value -= count - 24;
+    if (count > 1) transform += " translate(" + translate_x_value + " 0)";
     text.setAttribute("transform", transform);
-    if (label.length >= 7 && count != 1)
+    if (label.length >= 7 && count != 1);
         text.setAttribute('textLength', radius - translate_x_value - 3);
     return text;
 }
