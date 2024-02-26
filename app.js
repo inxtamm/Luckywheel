@@ -8,7 +8,7 @@ const spinbutton = document.getElementById('spinbutton');
 let wordsectors = document.getElementsByClassName('word')
 
 let filteredWords = [];
-let wordAngles = {};
+let words = [];
 let spinvalue = Math.ceil(Math.random() * 360);
 let canSpin = true;
 
@@ -146,16 +146,19 @@ function replace_text(text)
 
 function winningWord(){
     const rotAngle = parseInt(wheel.getAttribute('transform').split('(')[1].split(')')[0]);
-    for (const word in wordAngles){
-        let startAngle = wordAngles[word][0] + rotAngle;
-        let endAngle = wordAngles[word][1] + rotAngle;
-        startAngle %= 360;
-        endAngle %= 360;
-        if (startAngle > endAngle || startAngle == 0){
-            return word;
+    for (const word_info in words){
+        for (const word in words[word_info]){
+            let startAngle = words[word_info][word][0] + rotAngle;
+            let endAngle = words[word_info][word][1] + rotAngle;
+            startAngle %= 360;
+            endAngle %= 360;
+            if (startAngle > endAngle || startAngle == 0){
+                return word;
+            }
         }
     } 
 }
+
 function radians_to_degrees(radians)
 {
   return radians * (180 / Math.PI);
@@ -176,7 +179,7 @@ function genSectors(filteredWords)
         elements.push(circle);
         elements.push(createLabel(filteredWords[0], Math.PI, 0, 1));
     } else {
-        wordAngles = {};
+        words = [];
         for (let i = 0; i < filteredWords.length; i++) {
             const startAngle = i * angle;
             const endAngle = (i + 1) * angle;
@@ -192,7 +195,9 @@ function genSectors(filteredWords)
             path.setAttribute('stroke', '#ddddddba');
             elements.push(path);
             elements.push(createLabel(filteredWords[i], startAngle, endAngle, filteredWords.length));
-            wordAngles[filteredWords[i]] = [radians_to_degrees(startAngle), radians_to_degrees(endAngle)];
+            let dict = {}
+            dict[filteredWords[i]] = [radians_to_degrees(startAngle), radians_to_degrees(endAngle)]
+            words.push(dict);
         }
     }
     wheel.replaceChildren(...elements);
