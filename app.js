@@ -68,7 +68,7 @@ function addWord() {
     let button = document.createElement('button');
     let button_img = document.createElement('img');
     
-    button_img.setAttribute('src', 'data/x-button.png');
+    button_img.setAttribute('src', 'x-button.png');
 
     button.appendChild(button_img);
     button.setAttribute('id', 'x-button');
@@ -146,7 +146,6 @@ function replace_text(text)
 
 function winningWord(){
     const rotAngle = parseInt(wheel.getAttribute('transform').split('(')[1].split(')')[0]);
-
     for (const word in wordAngles){
         let startAngle = wordAngles[word][0] + rotAngle;
         let endAngle = wordAngles[word][1] + rotAngle;
@@ -157,7 +156,6 @@ function winningWord(){
         }
     } 
 }
-
 function radians_to_degrees(radians)
 {
   return radians * (180 / Math.PI);
@@ -174,7 +172,7 @@ function genSectors(filteredWords)
         circle.setAttribute('cy', `${centerPos[1]}`);
         circle.setAttribute('r', `${radius}`);
         circle.setAttribute('fill', 'white');
-        circle.setAttribute('stroke', 'black');
+        circle.setAttribute('stroke', '#ddddddba');
         elements.push(circle);
         elements.push(createLabel(filteredWords[0], Math.PI, 0, 1));
     } else {
@@ -191,7 +189,7 @@ function genSectors(filteredWords)
             const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             path.setAttribute('d', `M${centerPos[0]},${centerPos[1]} L${startX},${startY} A${radius},${radius} 0 0,1 ${endX},${endY} Z`);
             path.setAttribute('fill', 'white');
-            path.setAttribute('stroke', 'black');
+            path.setAttribute('stroke', '#ddddddba');
             elements.push(path);
             elements.push(createLabel(filteredWords[i], startAngle, endAngle, filteredWords.length));
             wordAngles[filteredWords[i]] = [radians_to_degrees(startAngle), radians_to_degrees(endAngle)];
