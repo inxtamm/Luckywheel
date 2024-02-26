@@ -68,7 +68,7 @@ function addWord() {
     let button = document.createElement('button');
     let button_img = document.createElement('img');
     
-    button_img.setAttribute('src', 'x-button.png');
+    button_img.setAttribute('src', 'data/x-button.png');
 
     button.appendChild(button_img);
     button.setAttribute('id', 'x-button');
