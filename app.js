@@ -3,6 +3,7 @@ const listclass = document.getElementById('wordcontainer');
 const wheel = document.getElementById('wheel');
 const superindex = document.getElementById('superindex');
 const subindex = document.getElementById('subindex');
+const normaltext = document.getElementById('normaltext');
 const spinbutton = document.getElementById('spinbutton');
 
 let wordsectors = document.getElementsByClassName('word')
@@ -18,13 +19,24 @@ centerPos[0] = parseInt(initialCircle.getAttribute('cx'));
 centerPos[1] = parseInt(initialCircle.getAttribute('cy'));
 const radius = parseInt(initialCircle.getAttribute('r'));
 
+let empty_table_container = document.createElement('div');
+let empty_table_text = document.createElement('span');
+empty_table_text.style.color = 'rgb(135, 135, 135)';
+empty_table_text.innerHTML = 'Tabel on tühi, sisestage sõna';
+empty_table_container.appendChild(empty_table_text);
+empty_table_container.style.background = 'rgb(240, 240, 240)';
+empty_table_container.style.padding = '15px 60px 20px 10px';
+empty_table_container.style.fontSize = '15px';
+empty_table_container.style.borderRadius = '10px';
+empty_table_container.style.width = 'max-content';
+empty_table_container.style.border = '2px solid rgb(188, 188, 188)';
+listclass.appendChild(empty_table_container);
 
 inputfield.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         addWord();
         return;
     }
-    
     const maxlength = inputfield.getAttribute('maxlength');
     const lengthOk = maxlength && inputfield.value.length < parseInt(maxlength);
     const updateChars = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '+'];
@@ -62,6 +74,7 @@ function addWord() {
     filteredWords.push(word);
     inputfield.value = '';
     if (filteredWords.length >= 2) setSpin(true);
+    if (filteredWords.length == 1) listclass.removeChild(empty_table_container);
 
     let wordsector = document.createElement('div');
     let textonsector = document.createElement('span');
@@ -110,6 +123,16 @@ function spin() {
         wheel.setAttribute("transform", "rotate(" + spinvalue + ")");
     }
 }
+subindex.addEventListener("click", () => {
+    inputfield.focus();
+});
+superindex.addEventListener("click", () => {
+    inputfield.focus();
+});
+normaltext.addEventListener("click", () => {
+    inputfield.focus();
+});
+
 
 function replace_text(text)
 {
