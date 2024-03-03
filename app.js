@@ -241,7 +241,7 @@ function createLabel(label, angleStart, angleEnd, count)
     if (count > 24) translate_x_value -= count - 24;
     if (count > 1) transform += " translate(" + translate_x_value + " 0)";
     text.setAttribute("transform", transform);
-    if (label.length >= 7 && count != 1);
+    if (label.length >= 7 && count != 1)
         text.setAttribute('textLength', radius - translate_x_value - 3);
     return text;
 }
